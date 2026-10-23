@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>YONEX V3 | Auto Roast Generator</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #ff2638;
+  --bg: #080808;
+  --panel: #121212;
+  --text: #f5f5f5;
+  --muted: #999;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  padding: 22px 14px 35px;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
+}
+
+header {
+  text-align: center;
+  padding: 25px 10px;
+}
+
+.logo {
+  display: inline-block;
+  border: 1px solid var(--red);
+  color: var(--red);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: clamp(28px, 7vw, 43px);
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+h1 span {
+  color: var(--red);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #aaa;
+  font-size: 11px;
+  margin-top: 18px;
+}
+
+.dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  background: #35e783;
+  box-shadow: 0 0 9px #35e783;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid #292929;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 30px #0005;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: #eee;
+}
+
+textarea, select {
+  width: 100%;
+  background: #090909;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 9px;
+  padding: 13px;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+textarea {
+  min-height: 115px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+textarea:focus, select:focus {
+  border-color: var(--red);
+}
+
+textarea::placeholder {
+  color: #686868;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+select {
+  min-height: 46px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.generate {
+  width: 100%;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 9px;
+  padding: 16px;
+  color: white;
+  background: linear-gradient(110deg, #e51127, #ff3548);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 20px #ff263822;
+}
+
+.generate:active {
+  transform: scale(.98);
+}
+
+.result {
+  display: none;
+}
+
+.result.show {
+  display: block;
+}
+
+.result-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.result-top h2 {
+  font-size: 17px;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--red);
+  border: 1px solid #67212a;
+  background: #2a0d11;
+  padding: 6px 9px;
+  border-radius: 20px;
+}
+
+.roast-output {
+  background: #090909;
+  border: 1px solid #292929;
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  padding: 17px;
+  line-height: 1.75;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  min-height: 75px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.secondary {
+  border: 1px solid #383838;
+  background: #1b1b1b;
+  color: white;
+  border-radius: 8px;
+  padding: 13px 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.secondary:hover {
+  border-color: var(--red);
+}
+
+footer {
+  text-align: center;
+  color: #666;
+  font-size: 11px;
+  line-height: 1.8;
+  padding: 15px 5px;
+}
+
+footer strong {
+  color: var(--red);
+  letter-spacing: 2px;
+}
+
+@media (max-width: 380px) {
+  .panel { padding: 15px; }
+  .options { gap: 10px; }
+  .actions { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">YONEX ORIGINAL</div>
+    <h1>YONEX <span>V3</span></h1>
+    <p style="font-weight:900; letter-spacing:3px; margin-top:7px;">
+      AUTO ROAST GENERATOR
+    </p>
+    <p class="subtitle">Your words. Your style. Your comeback.</p>
+    <div class="status">
+      <span class="dot"></span>
+      OFFLINE ENGINE READY
+    </div>
+  </header>
+
+  <section class="panel">
+    <label class="label" for="message">TARGET MESSAGE</label>
+    <textarea id="message"
+      placeholder="Paste the message you want to roast here..."></textarea>
+
+    <div class="options">
+      <div>
+        <label class="label" for="style">ROAST STYLE</label>
+        <select id="style">
+          <option value="savage">🔥 Savage</option>
+          <option value="funny">😂 Funny</option>
+          <option value="sarcastic">😏 Sarcastic</option>
+          <option value="cold">🥶 Cold & Calm</option>
+          <option value="smart">🧠 Smart Comeback</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="label" for="length">ROAST LENGTH</label>
+        <select id="length">
+          <option value="short">Short</option>
+          <option value="medium" selected>Medium</option>
+          <option value="long">Long</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="generate" id="generateBtn">
+      ⚡ GENERATE ROAST
+    </button>
+  </section>
+
+  <section class="panel result" id="result">
+    <div class="result-top">
+      <h2>🔥 Your Comeback</h2>
+      <span class="tag">YONEX V3</span>
+    </div>
+
+    <div class="roast-output" id="output" aria-live="polite"></div>
+
+    <div class="actions">
+      <button class="secondary" id="copyBtn">📋 COPY ROAST</button>
+      <button class="secondary" id="againBtn">🔄 REGENERATE</button>
+    </div>
+  </section>
+
+  <footer>
+    <strong>YONEX V3</strong><br>
+    Made for fun. No API. No account required.<br>
+    Keep it playful, keep it clever.
+  </footer>
+
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+const roasts = {
+  savage: [
+    "That message had confidence, but unfortunately confidence isn't the same thing as intelligence.",
+    "You typed all that just to prove that having a keyboard doesn't mean having a point.",
+    "Your argument arrived with main-character energy and left with background-character logic.",
+    "I've seen stronger comebacks in a loading screen. At least those eventually load.",
+    "You brought the attitude of a final boss and the logic of the tutorial NPC."
+  ],
+
+  funny: [
+    "Bro typed that like his keyboard was paying him per mistake.",
+    "That message needs a software update, a restart, and possibly a new owner.",
+    "I would explain the joke, but I don't want to turn this into a whole educational program.",
+    "Bro's argument is running on 2% battery with power-saving mode enabled.",
+    "This message has more plot holes than a movie written five minutes before release."
+  ],
+
+  sarcastic: [
+    "Wow. What a fascinating contribution to the conversation. History will almost certainly forget it.",
+    "I appreciate the effort. The result, however, has requested to remain anonymous.",
+    "Brilliant point. I especially enjoyed the part where the logic never arrived.",
+    "Thank you for that perspective. I now understand why silence is underrated.",
+    "That's certainly one way to say something without actually saying much."
+  ],
+
+  cold: [
+    "You said your piece. I read it. I'm still waiting for the point.",
+    "I'm not going to argue with you. Your message already made the situation clear.",
+    "You can keep talking. It doesn't make your argument stronger.",
+    "Confidence is fine. Being correct is a different achievement.",
+    "No long reply needed. Your argument speaks for itself."
+  ],
+
+  smart: [
+    "A strong opinion can start a discussion, but evidence is what makes it worth having.",
+    "You focused on sounding convincing instead of making a convincing point. Those aren't the same thing.",
+    "If your argument needs attitude to survive, perhaps the argument needs work.",
+    "Let's separate confidence from accuracy. They're clearly doing different jobs here.",
+    "A reply isn't automatically a rebuttal. Sometimes it's just more words."
+  ]
+};
+
+const endings = {
+  savage: [
+    "Next time, bring an argument instead of just bringing the energy.",
+    "Try again when the logic patch finishes downloading.",
+    "The confidence is impressive. The reasoning needs a little work."
+  ],
+  funny: [
+    "Even autocorrect has decided not to get involved.",
+    "Somebody give that argument a participation trophy.",
+    "Please allow the brain to reconnect before sending the next message."
+  ],
+  sarcastic: [
+    "I'll give that the consideration it deserves.",
+    "Truly an unforgettable moment in the history of typing.",
+    "Please, don't let facts interrupt the performance."
+  ],
+  cold: [
+    "That's all I needed to know.",
+    "No further explanation required.",
+    "We'll leave it there."
+  ],
+  smart: [
+    "The point is simple: explain your reasoning, not just your confidence.",
+    "Better evidence would make a much stronger reply.",
+    "A little clarity would go a long way."
+  ]
+};
+
+const openers = {
+  savage: "Bro, ",
+  funny: "Not gonna lie, ",
+  sarcastic: "Honestly, ",
+  cold: "Look, ",
+  smart: "Here's the thing: "
+};
+
+function getTopic(message) {
+  const text = message.toLowerCase();
+
+  const topics = [
+    { words: ["noob", "skill", "game", "gaming", "roblox", "player"], name: "gaming" },
+    { words: ["ugly", "looks", "face", "hair", "nose", "jawline"], name: "looks" },
+    { words: ["stupid", "idiot", "dumb", "brain"], name: "intelligence" },
+    { words: ["weak", "strong", "fight", "power"], name: "strength" },
+    { words: ["chatgpt", "ai", "robot", "bot"], name: "AI" },
+    { words: ["late", "reply", "ignore", "seen"], name: "replies" }
+  ];
+
+  for (const topic of topics) {
+    if (topic.words.some(word => text.includes(word))) {
+      return topic.name;
+    }
+  }
+
+  return "";
+}
+
+function makeRoast() {
+  const message = $("message").value.trim();
+  const style = $("style").value;
+  const length = $("length").value;
+
+  if (!message) {
+    $("message").focus();
+    $("message").placeholder = "Bhai, pehle message paste kar! 😭";
+    return;
+  }
+
+  const main = [...roasts[style]];
+  const ending = [...endings[style]];
+
+  // Shuffle to create different combinations.
+  main.sort(() => Math.random() - 0.5);
+  ending.sort(() => Math.random() - 0.5);
+
+  let lines = [];
+
+  if (length === "short") {
+    lines = [main[0]];
+  } else if (length === "medium") {
+    lines = [main[0], ending[0]];
+  } else {
+    lines = [
+      openers[style] + main[0].charAt(0).toLowerCase() + main[0].slice(1),
+      main[1],
+      ending[0],
+      ending[1]
+    ];
+  }
+
+  const topic = getTopic(message);
+
+  // Add a relevant gaming/AI/etc. line when the message matches.
+  if (topic && length !== "short") {
+    const topicLines = {
+      gaming: "Talking like a champion doesn't automatically put you on the leaderboard.",
+      looks: "Personal insults aren't an argument; try having an actual point.",
+      intelligence: "Calling names is easy. Explaining your reasoning takes more effort.",
+      strength: "Big claims are easy to make. Backing them up is a different story.",
+      AI: "Using a tool doesn't replace the thinking behind a good comeback.",
+      replies: "Taking longer to reply doesn't magically make an argument better."
+    };
+
+    if (length === "medium") {
+      lines.splice(1, 0, topicLines[topic]);
+    } else {
+      lines.splice(2, 0, topicLines[topic]);
+    }
+  }
+
+  $("output").textContent = lines.join("\n\n");
+  $("result").classList.add("show");
+  $("copyBtn").textContent = "📋 COPY ROAST";
+
+  $("result").scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+}
+
+$("generateBtn").addEventListener("click", makeRoast);
+$("againBtn").addEventListener("click", makeRoast);
+
+$("copyBtn").addEventListener("click", async () => {
+  const text = $("output").textContent;
+  if (!text) return;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    $("copyBtn").textContent = "✅ COPIED!";
+  } catch (err) {
+    // Fallback for browsers where clipboard permission is unavailable.
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      const success = document.execCommand("copy");
+      $("copyBtn").textContent = success ? "✅ COPIED!" : "SELECT & COPY";
+    } catch (e) {
+      $("copyBtn").textContent = "SELECT & COPY";
+    }
+
+    document.body.removeChild(area);
+  }
+
+  setTimeout(() => {
+    $("copyBtn").textContent = "📋 COPY ROAST";
+  }, 1800);
+});
+</script>
+</body>
+</html>
